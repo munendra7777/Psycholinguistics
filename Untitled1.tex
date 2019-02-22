@@ -1,0 +1,1104 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    \usepackage{mathrsfs}
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+    \definecolor{ansi-default-inverse-fg}{HTML}{FFFFFF}
+    \definecolor{ansi-default-inverse-bg}{HTML}{000000}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatibility definitions
+    \def\gt{>}
+    \def\lt{<}
+    \let\Oldtex\TeX
+    \let\Oldlatex\LaTeX
+    \renewcommand{\TeX}{\textrm{\Oldtex}}
+    \renewcommand{\LaTeX}{\textrm{\Oldlatex}}
+    % Document parameters
+    % Document title
+    \title{Untitled1}
+    
+    
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \begin{itemize}
+\tightlist
+\item
+  {[}x{]} \textbf{Munendra Kumar}
+\item
+  {[}X{]} \textbf{HOOMACL20170010}
+\item
+  {[}X{]} \textbf{M.A.~Computational Linguistics}
+\item
+  {[}X{]} \textbf{Semester 4}
+\item
+  {[}X{]} \textbf{LS363: Seminar in Psycholinguistics}
+\item
+  {[}X{]} \textbf{Course Instructor: Dr.~Shruti Sircar}
+\end{itemize}
+
+    \hypertarget{seminar-in-psycholinguistics}{%
+\section{Seminar in
+Psycholinguistics}\label{seminar-in-psycholinguistics}}
+
+\hypertarget{internal-assesment-i}{%
+\subsection{Internal Assesment I}\label{internal-assesment-i}}
+
+    \hypertarget{section-1}{%
+\subsubsection{Section 1}\label{section-1}}
+
+\hypertarget{what-are-some-of-the-major-theories-in-cognitive-development-how-does-spelkes-core-knowledge-theory-compare-with-piagets-theory}{%
+\paragraph{What are some of the major theories in cognitive development?
+How does Spelke's core knowledge theory compare with Piaget's
+theory?}\label{what-are-some-of-the-major-theories-in-cognitive-development-how-does-spelkes-core-knowledge-theory-compare-with-piagets-theory}}
+
+To understand \textbf{cognitive development} we must fist understand
+what \textbf{Cognition} Is. Cognition refers to all activity, processes,
+and products of the mind ,for example, Whatever you perceive using your
+senses. \emph{Piaget's (1936)} \textbf{theory of cognitive development}
+explains how a child constructs a mental picture of the world. He is
+also known as \textbf{father of psychology}. He was a contructivist
+i.e.~his theory suggest that children learn thing in building blocks as
+in constructing knowledge in bits for themselves. He observed his own
+children in infancy. Certainly, child perceives the world as it is and
+is very different from how how adults see it. He disagreed with the idea
+that intelligence was a fixed trait, and regarded cognitive development
+as a process which occurs due to biological maturation and interaction
+with the outer world.
+
+\emph{Piaget }was the first psychologist to make a systematic study of
+cognitive development and before him no recognisable work of cognitive
+development existed and the common assumption in psychology was that
+children are merely less competent thinkers than adults. Piaget showed
+that young children think in amazingly different ways compared to
+adults.Even though the theories proposed by \emph{Piaget} dates back to
+the decades but his earliest research is still informative. The
+longitivity of his theories have many reasons. Some of them are listed
+below:
+
+\begin{itemize}
+\tightlist
+\item
+  His theories/concepts provides us the sense as to what children's
+  thinking is like.
+\item
+  His theory addressses the topics that have been interest of many
+  scholars, scientists, philosophers and parents
+\item
+  His theory covers a wide age span of child development i.e.~from
+  infancy to adolescence
+\item
+  His theory covers object permanance which was the resultant of his
+  observation concerning infants' failure to search for objects if they
+  cannot see it.
+\end{itemize}
+
+    \emph{Immanual Kant} was his major motivation for the development of his
+theories, who was also interested in \emph{Origin of Knowledge}. His
+contributions include a stage theory of child cognitive development,
+detailed observational studies of cognition in children, and a series of
+simple but ingenious tests to reveal different cognitive abilities.
+
+\begin{itemize}
+\item
+  \textbf{There are three basic components to Piaget's cognitive
+  theory:}
+\item
+  \textbf{Schemas} Schemas are the basic building blocks of such
+  cognitive models, and enable us to form a mental representation of the
+  world. Piaget (1952, p.~7) defined a schema as: \textgreater{} ``a
+  cohesive, repeatable action sequence possessing component actions that
+  are tightly interconnected and governed by a core meaning.''
+\item
+  \textbf{Adaptation processes that enable the transition from one stage
+  to another}
+\item
+  \textbf{assimilation} (i.e.~using an existing schema (knowledge) to
+  deal with a new object or situation) - \textbf{equilibrium} (occurs
+  when a child's schemas can deal with most new information through
+  assimilation)
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{accomodation} (occuIntroductionrs when the existing schema
+    does not work, and needs to be changed to deal with a new object or
+    situation)
+  \end{itemize}
+\end{itemize}
+
+\begin{figure}
+\centering
+\includegraphics{attachment:piaget-adaptation.jpg}
+\caption{piaget-adaptation.jpg}
+\end{figure}
+
+\emph{For xample: a toddler sees a }kite* in the sky and calls it a bird
+from its previous schema and calls it a bird and mother corrects him and
+tells its not a bird but its a \emph{kite} and its a non-living object.
+This state is known as \emph{assimilation}. The toddler now understands
+the difference between \emph{the bird} and \emph{the kite}. This state
+is known as state of \emph{disequilibrium} and the next time the toddler
+sees a \emph{kite} and recognises it as a \emph{kite} This state is
+known as \emph{accomodation}. {[}Note:Assimilation is the addition of
+entirely new concept/idea/object while accomodation is the adjustment to
+the previuosly assimilated concept.{]}
+
+    \begin{itemize}
+\tightlist
+\item
+  \textbf{Stages of Development}
+\end{itemize}
+
+According to \emph{Piaget} all children walkthrough four stages and they
+do so in the same order. The four stages are as follows:
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Sensorimotor}: (ages 0-2), thinking involves seeing, hearing,
+  moving, touching, tasting, etc.
+\end{itemize}
+
+During this stage, children go from reflex-type actions to goal-directed
+activity and physically interact with objects to move to next stage. At
+this stage \emph{for example, children learn how to adjust their pupil
+for the light sensitivity.}
+
+\begin{itemize}
+\item
+  \textbf{Preoperational}: (ages 2-7), Development of language and the
+  ability to use symbols.
+
+  Child is self-centric; has trouble understanding another person's
+  point of view. At this stage they learn to represent things
+  symbolically i.e.~mental imagery,drawing or language acquisition.
+  \emph{for example, at this stage children usually develop
+  egocentricism in them i.e.~they cannot think of another aspect or
+  cannot accomodate someone else's point of view.}
+\item
+  \textbf{Concrete Operational}: (ages 7-11), Hands-on thinking stage.
+  Child understands reversibility, the laws of conservation, and can
+  classify and seriate things. \emph{for example, at this stage children
+  are able to put themselves in someone else's shoes i.e.~they can take
+  other's point of view or take into account more than one perspective.}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{Formal Operational}: (ages 11-adult), develops the ability
+    to think abstractly, think outside themselves about issues and
+    problems in society, and works to develop an identity. This stage
+    brings up the child's potential for solving different types of
+    problems that were impossible for them tackle at earlier stages. He
+    says that this stage is not universal. \emph{for example, children
+    at this stage understand that there are more realities might lead
+    their interest to fiction books.}
+  \end{itemize}
+\end{itemize}
+
+He came to the realization that, children view the world differently
+than adults do. And, there seemed to be stages you could look at where
+the way they view the world changes in some systematic way. In fact he
+had this notion that, there's a certain ability with each of these
+stages that they have to grasp, and until they grasp that, they can't
+reach the next level and in order to properly educate them we need to
+detrmine at what stage they actually are. We cannot not just treat them
+like little adults, it won't work, because they don't think like little
+adults. So, he spent a lot of his life describing these stages. He
+theorized that the development of thinking and language can be traced
+back to actions, perceptions, and imitations by babies.
+
+    \textbf{Sociocultural Approach} Russian psychologist \emph{Lev Vygotsky}
+portrayed children as social beings intertwined with other people who
+were eager to help them learn and gain skills. According to
+\emph{Vygotsky} there is a strong connection between learning language
+and the development of thinking. He states that higher mental processes
+are first developed through interaction and shared activities between
+children and another person usually parent/sibling. Children can then
+internalize these processes.
+
+\emph{Vygotsky}, unlike \emph{Piaget}, thought that abstract thinking
+could not develop on its own, but required language and Western
+schooling. Vygotsky believed that development and learning worked
+together through socialization and language and also that there was
+conPost \emph{Piaget} there is no grand unifying theory of cognitive
+development. However there have been several trends post piaget in
+developmental reasearch:
+
+\begin{itemize}
+\tightlist
+\item
+  connectionism (Bates, Elman, McClelland, Munakata)
+\item
+  information processing approaches (Case, Klahr, Siegler)
+\item
+  modularity theories (Leslie)
+\item
+  core knowledge (Spelke, Carey)
+\item
+  theory theory (Spelke, Carey, Gelman, Gopnik, Meltzoff,Wellman)
+\end{itemize}
+
+We will look at \emph{core knowledge(Spelke, Carey)} as that satisfies
+our purpose of question. Core knowledge theory addresses that human
+reasoning is guided by a collection of innate domain specific systems of
+knowledge. According to \emph{Spelke} children are like \emph{primate
+scientists} and argues that children are much more advanced in their
+thinking than \emph{Piaget} estimated. These core knowledge systems are
+innate mechanisms that do specific tasks. *For example: a songbird's
+ability to learn a song characteristic of their species or an ant's
+ability to navigate a terrain in search of food, and a human's ability
+to acquire language for that matter.
+
+Core knowledge theory operates on two domains:
+
+\begin{itemize}
+\item
+  \textbf{The domain of objects}
+\item
+  Experiments with infants show that from an early age infants parse the
+  visual array into objects and events. As early as 2 months of age,
+  infants expect objects to be permanent *For Example: If a ball is kept
+  out of sight of an infant while playing he will look for the ball
+  around him.
+\item
+  and that two objects cannot occupy the same space at the same time.
+  \emph{For example: a ball cannot pass through a wall.}
+\end{itemize}
+
+Objects are perceived as bounded, solid, continuous entities.
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{The domain of number}
+\item
+  Similar to our knowledge of objects we also posses knowlege of
+  knowledge. Experiments with infants show that from as early as 6
+  months of age, infants can detect a 1:2 ratio change in large numbers,
+  but not a 2:3 ratio changen i.e.~they would be able to tell the
+  diffrence between 10 balls and 20 marbles but not between the 20 and
+  30 marbles. By 9 months of age, infants can detect a 2:3 ratio change
+  and the precision in detection increases to a 7:8 ratio in adults.
+\end{itemize}
+
+    The core knowledge domains have mainly three characteristics: - core
+knowledge is task specific such that each system functions to solve a
+limited set of problems. \emph{For example, the number system can
+discriminate quantities based on their ratio, but this is not equivalent
+to the ability to count. The natural number system that supports
+counting is a complex construction that requires integration from the
+object and number systems as well as knowledge about the relation
+between number words and their referents.}
+
+\begin{itemize}
+\item
+  core knowledge domains are summarised in such a way that each system
+  operates with a fair degree of independence from other cognitive
+  systems. This has the advantage that core abilities are universal and
+  are effortlessly acquired with very little experience. One such
+  neurological research supports the independence of core systems and
+  shows evidence that these domain-specific abilities can be lost while
+  other cognitive abilities remain intact.
+\item
+  core knowledge is made up of a limited number of domain-specific
+  systems that comprise evolutionarily important abilities. Currently
+  there is evidence supporting domain-specific systems of objects,
+  number, agents and their actions, and geometry of the environment.
+\end{itemize}
+
+From the above we could conclude that \emph{Piaget's theory of
+development} focusses on just \emph{innate learning mechanisms and are
+domain general} while \emph{Spelke's theory of core knowledge} focusses
+on \emph{particular content knowledge and are domain specific}. nection
+between cognitive and biological development. He claimed that knowledge
+from social interactions stimulate cognitive growth and development.
+Social and cultural factors are influential in the development of
+intelligence and passing on of the \emph{history of social experience}
+and the use of \emph{cultural tools} are an important for thought
+development.
+
+    Post \emph{Piaget} there is no grand unifying theory of cognitive
+development. However there have been several trends post piaget in
+developmental reasearch:
+
+\begin{itemize}
+\tightlist
+\item
+  connectionism (Bates, Elman, McClelland, Munakata)
+\item
+  information processing approaches (Case, Klahr, Siegler)
+\item
+  modularity theories (Leslie)
+\item
+  core knowledge (Spelke, Carey)
+\item
+  theory theory (Spelke, Carey, Gelman, Gopnik, Meltzoff,Wellman)
+\end{itemize}
+
+We will look at \emph{core knowledge(Spelke, Carey)} as that satisfies
+our purpose of question. Core knowledge theory addresses that human
+reasoning is guided by a collection of innate domain specific systems of
+knowledge. According to \emph{Spelke} children are like \emph{primate
+scientists} and argues that children are much more advanced in their
+thinking than \emph{Piaget} estimated. These core knowledge systems are
+innate mechanisms that do specific tasks. *For example: a songbird's
+ability to learn a song characteristic of their species or an ant's
+ability to navigate a terrain in search of food, and a human's ability
+to acquire language for that matter.
+
+Core knowledge theory operates on two domains:
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{The domain of objects}
+\item
+  Experiments with infants show that from an early age infants parse the
+  visual array into objects and events. As early as 2 months of age,
+  infants expect objects to be permanent.
+\end{itemize}
+
+\emph{For Example: If a ball is kept out of sight of an infant while
+playing he will look for the ball around him.}
+
+\begin{itemize}
+\tightlist
+\item
+  and that two objects cannot occupy the same space at the same time.
+\end{itemize}
+
+\emph{For example: a ball cannot pass through a wall.}
+
+Objects are perceived as bounded, solid, continuous entities.
+
+\begin{itemize}
+\item
+  \textbf{The domain of number}
+\item
+  Similar to our knowledge of objects we also posses knowlege of
+  knowledge. Experiments with infants show that from as early as 6
+  months of age, infants can detect a 1:2 ratio change in large numbers,
+  but not a 2:3 ratio changen i.e.~they would be able to tell the
+  diffrence between 10 balls and 20 marbles but not between the 20 and
+  30 marbles. By 9 months of age, infants can detect a 2:3 ratio change
+  and the precision in detection increases to a 7:8 ratio in adults.
+\end{itemize}
+
+    The core knowledge domains have mainly three characteristics: - core
+knowledge is task specific such that each system functions to solve a
+limited set of problems. \emph{For example, the number system can
+discriminate quantities based on their ratio, but this is not equivalent
+to the ability to count. The natural number system that supports
+counting is a complex construction that requires integration from the
+object and number systems as well as knowledge about the relation
+between number words and their referents.}
+
+\begin{itemize}
+\item
+  core knowledge domains are summarised in such a way that each system
+  operates with a fair degree of independence from other cognitive
+  systems. This has the advantage that core abilities are universal and
+  are effortlessly acquired with very little experience. One such
+  neurological research supports the independence of core systems and
+  shows evidence that these domain-specific abilities can be lost while
+  other cognitive abilities remain intact.
+\item
+  core knowledge is made up of a limited number of domain-specific
+  systems that comprise evolutionarily important abilities. Currently
+  there is evidence supporting domain-specific systems of objects,
+  number, agents and their actions, and geometry of the environment.
+\end{itemize}
+
+From the above we could conclude that \emph{Piaget's theory of
+development} focusses on just \emph{innate learning mechanisms and are
+domain general} while \emph{Spelke's theory of core knowledge} focusses
+on \emph{particular content knowledge and are domain specific}.
+
+    \hypertarget{section-2}{%
+\subsubsection{Section 2}\label{section-2}}
+
+\hypertarget{why-do-children-assume-that-transitive-constructions-are-telic-and-intransitive-constructions-atelic-how-do-you-think-they-grow-out-of-this-bias}{%
+\paragraph{Why do children assume that transitive constructions are
+telic and intransitive constructions atelic? How do you think they grow
+out of this
+bias?}\label{why-do-children-assume-that-transitive-constructions-are-telic-and-intransitive-constructions-atelic-how-do-you-think-they-grow-out-of-this-bias}}
+
+The results from the study \emph{Aspectual Bootstrapping in Language
+Acquisition: Telicity and Transitivity} conducted by \emph{Laura Wagner}
+suggest that children as old as 2 to 3 years use \textbf{transtivity} as
+a structural cue to \textbf{telicity semantics} but the study also
+suggests that dependence on this cue fades with age.
+
+\textbf{Why this dependence fades away as children grow older?}
+
+Before diving into this we should first understand what determines
+\emph{telicity} and how \emph{Laura Wagner} carried out these studies.
+
+    \textbf{The Telic and Atelic distinction}
+
+Telicity is lexical semantic property of predicates and it indicates
+whether or not an event has an inherent endpoint or a boundary.
+
+\begin{itemize}
+\tightlist
+\item
+  An event is telic if it has an endpoint.
+\item
+  An event is atelic if it lacks an endpoint.
+\end{itemize}
+
+\begin{longtable}[]{@{}cc@{}}
+\toprule
+Telic & Atelic\tabularnewline
+\midrule
+\endhead
+The dog jumped into the river. & The dog jumped.\tabularnewline
+\bottomrule
+\end{longtable}
+
+    \textbf{There are various tests to distinguish between telic and atelic
+predicates.}
+
+Let's have a closer look on these tests:
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Verb `almost'} \emph{(Dowty, 1979; Vendler, 1967)}
+\end{itemize}
+
+When we use the verb \emph{almost} with such predicates, we get two
+interpretations for telic predicates and one interpretation for atelic
+predicates.
+
+Let's test this against a telic predicate and atelic predicate.flexible
+about where their count- ing criterion comes from
+
+\begin{longtable}[]{@{}cc@{}}
+\toprule
+Telic & Atelic\tabularnewline
+\midrule
+\endhead
+The boy almost ate an apple. & The boy almost ate.\tabularnewline
+\bottomrule
+\end{longtable}
+
+\emph{In the above example we get two interpretations for the telic
+predicate. First, that `The boy started to eat the apple.' and Second,
+that `The boy started to eat the apple but did not finish it'. While in
+the atelic predicate we notice that we get only one interpretation which
+is `The boy did not even begin eating.'}
+
+Clearly, we can see that verb \emph{almost} disambiguates \emph{telic
+and atelic} predicates.
+
+    \begin{itemize}
+\tightlist
+\item
+  \textbf{Adverbial `for X time' and `in X time'} \emph{(Dowty, 1979;
+  Vendler, 1967)}
+\end{itemize}
+
+Telic and atelic naturally combine with different adverbs of time
+indicating duration of an event.
+
+\begin{longtable}[]{@{}cc@{}}
+\toprule
+\begin{minipage}[b]{0.53\columnwidth}\centering
+Telic\strut
+\end{minipage} & \begin{minipage}[b]{0.41\columnwidth}\centering
+Atelic\strut
+\end{minipage}\tabularnewline
+\midrule
+\endhead
+\begin{minipage}[t]{0.53\columnwidth}\centering
+The boy ate an apple in 5 minutes/\#for 5 minutes.\strut
+\end{minipage} & \begin{minipage}[t]{0.41\columnwidth}\centering
+The boy ate for 5 minutes/\#in 5 minutes.\strut
+\end{minipage}\tabularnewline
+\bottomrule
+\end{longtable}
+
+\emph{In the example we notice that the telic predicate naturally
+combines with the adverbial `in 5 minutes' while, atelic predicate
+naturally combine with the adverbial `for 5 minutes'. However, the
+non-natural alternatives marked with \# may give a sensible
+interpretation.}
+
+    \begin{itemize}
+\tightlist
+\item
+  \textbf{Progressive}
+\end{itemize}
+
+\begin{longtable}[]{@{}cc@{}}
+\toprule
+a. Imperfective-atelic & b. Perfective-atelic\tabularnewline
+\midrule
+\endhead
+Tamyra was singing. & Tamyra sang.\tabularnewline
+\bottomrule
+\end{longtable}
+
+\emph{In the above examples we notice that the imperfective-atelic
+predicate entails perfective-atelic predicate while imperfective-telic
+predicate does not entails perfective-telic predicate, instead it
+contradicts perfective-telic predicate on adding continuation `when
+Simon cut her off', however, adding the continuation to the
+imperfective-telic predicate yileds a perfectly natural sounding
+construction}
+
+    \begin{longtable}[]{@{}cc@{}}
+\toprule
+\begin{minipage}[b]{0.48\columnwidth}\centering
+c. Imperfective-telic\strut
+\end{minipage} & \begin{minipage}[b]{0.46\columnwidth}\centering
+d. Perfective-telic\strut
+\end{minipage}\tabularnewline
+\midrule
+\endhead
+\begin{minipage}[t]{0.48\columnwidth}\centering
+LaToya was singing the song./when Simon cut her off.\strut
+\end{minipage} & \begin{minipage}[t]{0.46\columnwidth}\centering
+LaToya sang the song./when Simon cut her off.\strut
+\end{minipage}\tabularnewline
+\bottomrule
+\end{longtable}
+
+    \begin{itemize}
+\tightlist
+\item
+  \textbf{Temporal modification} \emph{(Verkuyl,1972,1993)}
+\end{itemize}
+
+There are two conditions concerning temporal modification that have to
+be fulfilled as suggested by \emph{Verkuyl}. - full temporal PPs should
+be conjoined (i.e.~the second `on' cannot be omitted) - the temporal
+units denoted by these PPs should be subsequent. \emph{For instance, the
+expression `on Monday and on Tuesday' provides good grounds for testing,
+while `on Monday and on Wednesday' does not.}
+
+\begin{longtable}[]{@{}cc@{}}
+\toprule
+\begin{minipage}[b]{0.45\columnwidth}\centering
+Atelic\strut
+\end{minipage} & \begin{minipage}[b]{0.49\columnwidth}\centering
+Telic\strut
+\end{minipage}\tabularnewline
+\midrule
+\endhead
+\begin{minipage}[t]{0.45\columnwidth}\centering
+Mary drove her car on Monday and on Tuesday.\strut
+\end{minipage} & \begin{minipage}[t]{0.49\columnwidth}\centering
+Mary ran a mile on Monday and on Tuesday\strut
+\end{minipage}\tabularnewline
+\bottomrule
+\end{longtable}
+
+\emph{In the above examples we notice that atelic predicate gives rise
+to a interpretation that `Mary started driving her car on Monday and
+continued till Tuesday while telic predicate has only one interpretation
+that 'Mary ran 1 mile on Monday and 1 mile on Tuesday' and is
+specifically marked by a boundary i.e. `a mile'}
+
+    \begin{itemize}
+\tightlist
+\item
+  \textbf{Countability} \emph{(Bach, 1986)}
+\end{itemize}
+
+\emph{Bach} argued that atelic predicates could not be naturally counted
+at all but \emph{Wagner} disagrees with him and argues that it is more
+difficult to count atelic events than telic ones because atelic
+descriptions do not provide criteria for counting---such as an inherent
+endpoint but are flexible about where their counting criterion comes
+from while telic ones have a specific criterion.
+
+\begin{longtable}[]{@{}cc@{}}
+\toprule
+Telic & Atelic\tabularnewline
+\midrule
+\endhead
+Ryan fell asleep 3 times & ?? Ryan slept 3 times\tabularnewline
+\bottomrule
+\end{longtable}
+
+\emph{In the above example, since atelic predicates lack specific
+endpoint therefore counting them is more awkward.}
+
+    Despite the complexities of the telicity predicates transitive
+structures do play an important role in determining telicity atleast in
+the case of infants as young as 2 year olds regardless of whether
+transitive structures are the only way to convey telicity or their
+ability to do so actually depends on deeper semantics and syntactic
+properties. \emph{(cf.Hay et al., 1999; Jackendoff, 1996; Pustejovsky,
+1995)}
+
+Laura wagner conducted a study on 2, 3 and 5 years olds children using
+an event counting task. Her studies contained a salient goal i.e.~the
+right individuation unit for a telic description achieved by two or more
+actions/steps separated by a spatiotemporal pause (plausible
+individuation units for an atelic description)
+
+\emph{For Example: A boy pushes a ball into the can.(in two distinct
+spatiotemporal steps/attempts)}
+
+So, here: Goal= to put the ball into the can (telic predicate)
+Spatiotemporal steps= steps/attempts made to put the ball into the
+can.(Atelic predicate)
+
+Children were shown movies which were described with either a telic or
+an atelic predicate, and the dependent measure was whether children
+counted the event's goals or steps.
+
+Wagner tested 4 types of transitivity-telicity:
+
+\begin{longtable}[]{@{}cc@{}}
+\toprule
+\begin{minipage}[b]{0.37\columnwidth}\centering
+Canonical\strut
+\end{minipage} & \begin{minipage}[b]{0.57\columnwidth}\centering
+All transitive pairs\strut
+\end{minipage}\tabularnewline
+\midrule
+\endhead
+\begin{minipage}[t]{0.37\columnwidth}\centering
+transitive structure= telic meaning\strut
+\end{minipage} & \begin{minipage}[t]{0.57\columnwidth}\centering
+transitive structure = telic/atelic meaning\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.37\columnwidth}\centering
+intransitive structure= atelic meaning\strut
+\end{minipage} & \begin{minipage}[t]{0.57\columnwidth}\centering
+\emph{Example1:The bird popped the balloon.}\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.37\columnwidth}\centering
+\emph{Example1:The girl painted a flower.}\strut
+\end{minipage} & \begin{minipage}[t]{0.57\columnwidth}\centering
+\emph{Example2:The bird poked the balloon}\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.37\columnwidth}\centering
+\emph{Example2:The girl painted.}\strut
+\end{minipage} & \begin{minipage}[t]{0.57\columnwidth}\centering
+\strut
+\end{minipage}\tabularnewline
+\bottomrule
+\end{longtable}
+
+\begin{longtable}[]{@{}ll@{}}
+\toprule
+\begin{minipage}[b]{0.50\columnwidth}\raggedright
+All intransitive pairs\strut
+\end{minipage} & \begin{minipage}[b]{0.44\columnwidth}\raggedright
+Mass count noun pairs\strut
+\end{minipage}\tabularnewline
+\midrule
+\endhead
+\begin{minipage}[t]{0.50\columnwidth}\raggedright
+instransitive structure = telic/atelic meaning\strut
+\end{minipage} & \begin{minipage}[t]{0.44\columnwidth}\raggedright
+transitive structure with mass count noun = telic/atelic meaning\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.50\columnwidth}\raggedright
+Example1:The door closed.\strut
+\end{minipage} & \begin{minipage}[t]{0.44\columnwidth}\raggedright
+Example1:The girl drank a glass of juice.\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.50\columnwidth}\raggedright
+Example2:The door slid.\strut
+\end{minipage} & \begin{minipage}[t]{0.44\columnwidth}\raggedright
+Example2:The girl drank juice.\strut
+\end{minipage}\tabularnewline
+\bottomrule
+\end{longtable}
+
+    The results of the study conducted by Wagner showed that children a
+syoung as 2 year 10 months old use the telicity of a description to
+choose their individuation strategy and that children of this age know
+at least some ways of marking telicity in English.
+
+\textbf{Now the question arises as to why do children assume that
+transitive constructions are telic and intransitive constructions atelic
+and this bias wanes with age?} To answer this question let's not forget
+that we are dealing with the children of the age group 2-5 year olds.
+However, telicity is one of the topics of semantics which even adults
+find it difficult adjust with. Considering the complexities involved in
+telicity semantics it is expected as children get older, the reliance on
+transitive structures for telicity fades away because children begin to
+understand the meanings of the specific elements in the sentence better
+as well as how to put those meaning together.
+
+We should also not forget that very young children produce incomplete
+predicates so the assessment of knowledge of telicity semantics is based
+solely on the available information \emph{i.e.~the verb}.
+
+The studies conducted by \emph{VanHout(2000)} suggests that there is a
+long gap between the age at which children notice something about the
+and the age at which they know how to syntactically encode it. One study
+conducted by \emph{Melissa Kline, Jesse Snedeker \& Laura Schulz(2017)}
+on children of 3-4 year old to determine \emph{How do children map
+linguistic representations onto the conceptual structures that they
+encode?} reveal that children's expectations about transitive verbs are
+at least partly driven by their non-linguistic understanding of causal
+events. Children expect transitive syntax to refer to scenes where the
+agent's action is a plausible cause of the outcome. However, we see that
+young infants do differentiate between transitive and atelic predicates
+and have rich representation of what constitutes an agent, a cause or an
+event but not necessarily that they have adult-like representations.
+
+There could be two factors involved as to why transtivity serves as a
+cue to telicity semantics as disscussed by \emph{Wagner}:
+
+\begin{itemize}
+\tightlist
+\item
+  Since direct objects can define event boundaries and serve to measure
+  them out.They may not be the only way to accomplish this, and if they
+  lack certain properties they will not do it at all, but on the whole
+  they are very effective at bounding events.
+\item
+  The second factor is that the acquisition of meaning is hard
+  (cf.~Naigles, 2002), and an imperfect structural cue to meaning is
+  better than no cue at all.
+\end{itemize}
+
+At younger stage children assume that transitive structures signal telic
+meanings, they do not conversely assume that intransitive structures
+signal atelic meanings. Children are quite successful at assigning telic
+meaning to (surface) intransitive sentences.
+
+    \hypertarget{references}{%
+\subsubsection{References}\label{references}}
+
+\begin{itemize}
+\tightlist
+\item
+  Spelke,Elizabeth S. and D. Kinzler,Katherine(2007).Core
+  knowledge.\emph{Developmental Science} 10:1 (2007), pp 89--96
+\item
+  Schulz,Laura(2012).Infant and Early Childhood Cognition.Massachusetts
+  Institute of Technology: MIT OpenCourseWare, https://ocw.mit.edu.
+\item
+  Susan,Hespos (2017).Core knowledge
+\item
+  Rakison, David(2017).Principles of Child Development.85-221
+\item
+  Kirk,Sara (2012).Piaget \& Vygotsky: A Comparison.
+\item
+  Joordens,Steve (2017). Introduction to Psychology.University of
+  Toronto, https://www.coursera.org.
+\item
+  Spelke,Elizabeth S.,Breinlinger,Karen. Macomber,Janet and
+  Jocobson,Kristen(1992). Origins of Knowledge, \emph{Psychological
+  Review} 1992,Vol.99.No.4,605-632
+\item
+  Lakusta,Laura \& Susan,Carey(2015) Twelve-Month-Old Infants' Encoding
+  of Goal and Source Paths in Agentive and Non-Agentive Motion Events,
+  \emph{Language Learning and Development}, 11:2, 152-175, DOI:
+  10.1080/15475441.2014.896168
+\item
+  Wagner, Laura. (2006). Aspectual Bootstrapping in Language
+  Acquisition: Telicity and Transitivity. \emph{Language Learning and
+  Development}. 2. 51-76. 10.1207/s15473341lld0201\_3.
+\item
+  Katherine Messenger, Sylvia Yuan \& Cynthia Fisher (2015) Learning
+  Verb Syntax via Listening: New Evidence From 22-Month-Olds,
+  \emph{Language Learning and Development}, 11:4, 356-368, DOI:
+  10.1080/15475441.2014.978331
+\item
+  Melissa Kline, Jesse Snedeker \& Laura Schulz (2017) Linking Language
+  and Events: Spatiotemporal Cues Drive Children's Expectations About
+  the Meanings of Novel Transitive Verbs, \emph{Language Learning and
+  Development}, 13:1, 1-23, DOI: 10.1080/15475441.2016.1171771
+\item
+  Lucia Pozzan, Lila R. Gleitman \& John C. Trueswell (2016) Semantic
+  Ambiguity and Syntactic Bootstrapping: The Case of Conjoined-Subject
+  Intransitive Sentences, \emph{Language Learning and Development},
+  12:1, 14-41, DOI: 10.1080/15475441.2015.1018420
+\item
+  Shaffer,David R. Kipp,Katherine(2007). Theories of Human
+  Development.\emph{Developmental Psychology Childhood and Adolescence}.
+  pp 41-75,
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} 
+\end{Verbatim}
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
